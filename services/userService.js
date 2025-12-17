@@ -1,5 +1,6 @@
-const { User } = require('../models'); 
 const jwt = require('jsonwebtoken');
+const { User } = require('../models');
+ 
 const { JWT_SECRET } = process.env; 
 
 const addNewUser = async (displayName, email, password, image) => {
@@ -20,28 +21,33 @@ const addNewUser = async (displayName, email, password, image) => {
     };
 
     const token = jwt.sign({ payload }, JWT_SECRET, { expiresIn: '1h' });
-    console.log(token)
-    return { token };
-
+    
+      return { token };
   } catch (error) {
-      console.error('Erro no addNewUser:', error);
-
-    return { error: { message: 'Internal server error' } };
+      return { error: { message: 'Internal server error' } };
   }
 };
 
 const getAllUsers = async () => {
   try {
     const listOfUsers = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
-    return listOfUsers; 
+      return listOfUsers; 
   } catch (error) {
-    
-    return { error: { message: 'Internal server error' } };
+      return { error: { message: 'Internal server error' } };
   }
 };
 
 
+const getUserById = async (id) => {
+    const user = await User.findOne({
+       where: { id },
+       attributes: ['id', 'displayName', 'email', 'image'],
+  });
+    return user;
+};
+
 module.exports = { 
   addNewUser,
   getAllUsers,
+  getUserById,
  };

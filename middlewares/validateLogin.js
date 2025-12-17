@@ -5,7 +5,7 @@ const emailRegex = /^[a-z0-9.]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 const validateLoginBody = (body) =>
   Joi.object({
     email: Joi.string().pattern(emailRegex).required(),
-    password: Joi.string().length(6).required()
+    password: Joi.string().length(6).required(),
   }).validate(body);
 
 const validateLogin = (req, res, next) => {

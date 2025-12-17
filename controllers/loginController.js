@@ -11,9 +11,7 @@ const loginFind = async (req, res) => {
     }
 
     return res.status(200).json({ token: result.token });
-
   } catch (error) {
-
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
