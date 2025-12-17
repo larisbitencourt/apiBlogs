@@ -6,16 +6,16 @@ const validateUserBody = (body) =>
 
   Joi.object({
     displayName: Joi.string().min(8).required().messages({
-      'string.min':  '\"displayName\" length must be at least 8 characters long',
+      'string.min': '"displayName" length must be at least 8 characters long',
       'any.required': 'DisplayName is required',
     }),
     email: Joi.string().pattern(emailRegex).required().messages({
-      'string.pattern.base': '\"email\" must be a valid email',
-      'any.required': '\"email\" is required',
+      'string.pattern.base': '"email" must be a valid email',
+      'any.required': '"email" is required',
     }),
     password: Joi.string().length(6).required().messages({
-      'string.length': '\"password\" length must be 6 characters long',
-      'any.required': '\"password\" is required',
+      'string.length': '"password" length must be 6 characters long',
+      'any.required': '"password" is required',
     }),
     image: Joi.string().uri().optional(),
   }).validate(body);

@@ -15,12 +15,10 @@ app.get('/', (request, response) => {
 
 app.get('/user', auth, userController.getAllUsers);
 
+app.get('/user/:id', auth, userController.getUserById);
+
 app.post('/login', validateLogin, loginController.loginFind);
 
 app.post('/user', validateUser, userController.addNewUser);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
-
-
-
-

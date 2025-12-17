@@ -11,9 +11,7 @@ const addNewUser = async (req, res) => {
     }
 
     return res.status(201).json({ token: newUser.token });
-
   } catch (error) {
-
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
@@ -24,11 +22,28 @@ const getAllUsers = async (req, res) => {
 
     return res.status(200).json(listOfUsers);
   } catch (error) {
-    return res.status(500).json({ message: 'Algo deu errado' });
+    return res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await userService.getUserById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User does not exist' });
+    }
+
+    return res.status(200).json(user);
+  } catch (error) {
+     return res.status(500).json({ message: 'Internal server error' });
+  };
+}
+
 
 module.exports = {
   addNewUser,
   getAllUsers,
+  getUserById,
 };
