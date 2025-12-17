@@ -30,4 +30,18 @@ const addNewUser = async (displayName, email, password, image) => {
   }
 };
 
-module.exports = { addNewUser };
+const getAllUsers = async () => {
+  try {
+    const listOfUsers = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
+    return listOfUsers; 
+  } catch (error) {
+    
+    return { error: { message: 'Internal server error' } };
+  }
+};
+
+
+module.exports = { 
+  addNewUser,
+  getAllUsers,
+ };

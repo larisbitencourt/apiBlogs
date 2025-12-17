@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const { validateLogin, validateUser } = require('./middlewares');
-const { loginController } = require('./controllers/loginController');
-const { userController } = require('./controllers/userController');
+const { validateLogin, validateUser, auth } = require('./middlewares');
+const loginController = require('./controllers/loginController');
+const userController = require('./controllers/userController');
 
 const app = express();
 
@@ -13,9 +13,11 @@ app.get('/', (request, response) => {
   response.send();
 });
 
-app.post('/login', validateLogin, loginController);
+app.get('/user', auth, userController.getAllUsers);
 
-app.post('/user', validateUser, userController);
+app.post('/login', validateLogin, loginController.loginFind);
+
+app.post('/user', validateUser, userController.addNewUser);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 

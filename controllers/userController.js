@@ -1,6 +1,6 @@
 const userService = require('../services/userService');
 
-const userController = async (req, res) => {
+const addNewUser = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
 
@@ -18,6 +18,17 @@ const userController = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const listOfUsers = await userService.getAllUsers();
+
+    return res.status(200).json(listOfUsers);
+  } catch (error) {
+    return res.status(500).json({ message: 'Algo deu errado' });
+  }
+};
+
 module.exports = {
-  userController,
+  addNewUser,
+  getAllUsers,
 };

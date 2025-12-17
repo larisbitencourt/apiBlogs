@@ -1,12 +1,10 @@
 const loginService = require('../services/loginService');
 
-const loginController = async (req, res) => {
+const loginFind = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const result = await loginService.loginFind(email, password);
-    // console.log('controller', result);
-    
     
     if (result.error) {
       return res.status(400).json({ message: result.error.message });
@@ -21,5 +19,5 @@ const loginController = async (req, res) => {
 };
 
 module.exports = {
-  loginController,
+  loginFind,
 };
