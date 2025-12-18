@@ -5,14 +5,14 @@ const addNewCategory = async (name) => {
       return newCategory;
 };
 
-// const getAllUsers = async () => {
-//   try {
-//     const listOfUsers = await User.findAll({ attributes: ['id', 'displayName', 'email', 'image'] });
-//       return listOfUsers; 
-//   } catch (error) {
-//       return { error: { message: 'Internal server error' } };
-//   }
-// };
+const getAllCategories = async () => {
+  try {
+    const listOfCategories = await Category.findAll();
+      return listOfCategories; 
+  } catch (error) {
+      return { error: { message: 'Internal server error' } };
+  }
+};
 
 // const getUserById = async (id) => {
 //     const user = await User.findOne({
@@ -24,6 +24,6 @@ const addNewCategory = async (name) => {
 
 module.exports = { 
   addNewCategory,
-//   getAllUsers,
-//   getUserById,
+  getAllCategories,
+
  };

@@ -24,15 +24,15 @@ const addNewCategory = async (req, res) => {
   }
 };
 
-// const getAllUsers = async (req, res) => {
-//   try {
-//     const listOfUsers = await userService.getAllUsers();
+const getAllCategories = async (req, res) => {
+  try {
+    const listOfCategories = await categoryService.getAllCategories();
 
-//     return res.status(200).json(listOfUsers);
-//   } catch (error) {
-//     return res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
+    return res.status(200).json(listOfCategories);
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
 
 // const getUserById = async (req, res) => {
 //   try {
@@ -51,4 +51,5 @@ const addNewCategory = async (req, res) => {
 
 module.exports = {
     addNewCategory,
+    getAllCategories,
 };

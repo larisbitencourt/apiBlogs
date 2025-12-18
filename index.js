@@ -18,6 +18,8 @@ app.get('/user', auth, userController.getAllUsers);
 
 app.get('/user/:id', auth, userController.getUserById);
 
+app.get('/categories', auth, categoryController.getAllCategories);
+
 app.post('/login', validateLogin, loginController.loginFind);
 
 app.post('/user', validateUser, userController.addNewUser);
