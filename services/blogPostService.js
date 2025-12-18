@@ -1,0 +1,40 @@
+const { BlogPost, Category, PostCategory } = require('../models');
+ 
+const addNewBlogPost = async ({ title, content, categoryIds, userId }) => {
+
+  const categories = await Category.findAll({
+    where: { id: categoryIds },
+  });
+
+  if (categories.length !== categoryIds.length) {
+    return { error: { message: '"categoryIds" not found' } };
+  }
+
+  const newPost = await BlogPost.create(
+    {
+      title,
+      content,
+      userId,
+      published: new Date(),
+      updated: new Date(), 
+    });
+    
+  const postCategories = categoryIds.map((categoryId) => ({
+    postId: newPost.id,
+    categoryId,
+  }));
+
+  await PostCategory.bulkCreate(postCategories, { tableName: 'PostsCategories' });
+
+  return {
+    id: newPost.id,
+    userId,
+    title: newPost.title,
+    content: newPost.content,
+  };
+};
+
+module.exports = { 
+  addNewBlogPost,
+
+ };
