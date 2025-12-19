@@ -8,7 +8,6 @@ const validatePostBody = (body) =>
   }).validate(body);
 
   const validatePostUpdatedBody = (body) => {
-   
     if (body.categoryIds) {
     return { error: { message: 'Categories cannot be edited' } };
   }
@@ -16,7 +15,7 @@ const validatePostBody = (body) =>
    return Joi.object({
     title: Joi.string().required(),
     content: Joi.string().required(),
-  }).validate(body)
+  }).validate(body);
 };
 
 const validatePost = (req, res, next) => {

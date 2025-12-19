@@ -1,6 +1,11 @@
 require('dotenv').config();
 const express = require('express');
-const { validateLogin, validateUser, auth, validatePost, validatePostUpdated } = require('./middlewares');
+const { 
+  validateLogin, 
+  validateUser, 
+  auth, 
+  validatePost, 
+  validatePostUpdated } = require('./middlewares');
 const loginController = require('./controllers/loginController');
 const userController = require('./controllers/userController');
 const categoryController = require('./controllers/categoryController');
