@@ -77,7 +77,6 @@ const getPostById = async (id) => {
 };
 
 const updatePost = async (postId, userId, { title, content }) => {
- 
   const post = await BlogPost.findByPk(postId);
 
   if (!post) {
@@ -102,15 +101,9 @@ const updatePost = async (postId, userId, { title, content }) => {
   return updatedPostWithCategories;
 };
 
-module.exports = {
-  updatePost,
-};
-
-
 module.exports = { 
   addNewBlogPost,
   getAllPosts,
   getPostById,
   updatePost,
-
  };

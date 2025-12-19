@@ -64,7 +64,6 @@ const updatePost = async (req, res) => {
   return res.status(200).json(updatedPost);
 };
 
-
 module.exports = {
   addNewBlogPost,
   getAllPosts,
