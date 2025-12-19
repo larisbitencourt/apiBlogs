@@ -42,4 +42,6 @@ app.put('/post/:id', auth, validatePostUpdated, blogPostController.updatePost);
 
 app.delete('/post/:id', auth, blogPostController.deletePost);
 
+app.delete('/user/me', auth, userController.deleteUser);
+
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
