@@ -43,7 +43,7 @@ describe('11 - Sua aplicação deve ter o endpoint DELETE `post/:id`', () => {
     await frisby
       .post(`${url}/login`,
         {
-          email: 'MichaelSchumacher@gmail.com',
+          email: 'michaelschumacher@gmail.com',
           password: '123456',
         })
       .expect('status', 200)
