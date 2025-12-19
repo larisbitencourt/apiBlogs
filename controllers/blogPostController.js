@@ -18,7 +18,17 @@ const addNewBlogPost = async (req, res) => {
   return res.status(201).json(result);
 };
 
-module.exports = {
-  addNewBlogPost,
+const getAllPosts = async (req, res) => {
+  try {
+    const listOfPosts = await blogPostService.getAllPosts();
+
+    return res.status(200).json(listOfPosts);
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
+module.exports = {
+  addNewBlogPost,
+  getAllPosts,
+};

@@ -1,7 +1,6 @@
-const { BlogPost, Category, PostCategory } = require('../models');
+const { BlogPost, Category, PostCategory, User } = require('../models');
  
 const addNewBlogPost = async ({ title, content, categoryIds, userId }) => {
-
   const categories = await Category.findAll({
     where: { id: categoryIds },
   });
@@ -17,7 +16,8 @@ const addNewBlogPost = async ({ title, content, categoryIds, userId }) => {
       userId,
       published: new Date(),
       updated: new Date(), 
-    });
+    },
+);
     
   const postCategories = categoryIds.map((categoryId) => ({
     postId: newPost.id,
@@ -34,7 +34,31 @@ const addNewBlogPost = async ({ title, content, categoryIds, userId }) => {
   };
 };
 
+const getAllPosts = async () => {
+  try {
+    const listOfPosts = await BlogPost.findAll(
+      { include: [
+        { 
+          model: User, 
+          as: 'user',
+          attributes: ['id', 'displayName', 'email', 'image'],
+        },
+        { 
+          model: Category, 
+          as: 'categories', 
+          through: { attributes: [] }, 
+        },
+       ],
+     },
+);
+      return listOfPosts; 
+  } catch (error) {
+      return { error: { message: 'Internal server error' } };
+  }
+};
+
 module.exports = { 
   addNewBlogPost,
+  getAllPosts,
 
  };
