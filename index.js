@@ -40,4 +40,6 @@ app.post('/post', auth, validatePost, blogPostController.addNewBlogPost);
 
 app.put('/post/:id', auth, validatePostUpdated, blogPostController.updatePost);
 
+app.delete('/post/:id', auth, blogPostController.deletePost);
+
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
