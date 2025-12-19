@@ -21,6 +21,8 @@ app.get('/user/:id', auth, userController.getUserById);
 
 app.get('/categories', auth, categoryController.getAllCategories);
 
+app.get('/post', auth, blogPostController.getAllPosts);
+
 app.post('/login', validateLogin, loginController.loginFind);
 
 app.post('/user', validateUser, userController.addNewUser);
