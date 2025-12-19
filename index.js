@@ -28,6 +28,8 @@ app.get('/categories', auth, categoryController.getAllCategories);
 
 app.get('/post', auth, blogPostController.getAllPosts);
 
+app.get('/post/search', auth, blogPostController.searchPosts);
+
 app.get('/post/:id', auth, blogPostController.getPostById);
 
 app.post('/login', validateLogin, loginController.loginFind);
