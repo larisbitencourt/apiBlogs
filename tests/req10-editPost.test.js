@@ -90,7 +90,7 @@ describe('10 - Sua aplicação deve ter o endpoint PUT `/post/:id`', () => {
     await frisby
       .post(`${url}/login`,
         {
-          email: 'MichaelSchumacher@gmail.com',
+          email: 'michaelschumacher@gmail.com',
           password: '123456',
         })
       .expect('status', 200)
@@ -99,6 +99,7 @@ describe('10 - Sua aplicação deve ter o endpoint PUT `/post/:id`', () => {
         const result = JSON.parse(body);
         token = result.token;
       });
+
 
     await frisby
       .setup({

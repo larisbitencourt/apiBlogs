@@ -76,9 +76,41 @@ const getPostById = async (id) => {
     return post;
 };
 
+const updatePost = async (postId, userId, { title, content }) => {
+ 
+  const post = await BlogPost.findByPk(postId);
+
+  if (!post) {
+    return { error: { status: 404, message: 'Post does not exist' } };
+  }
+
+  if (post.userId !== userId) {
+    return { error: { status: 401, message: 'Unauthorized user' } };
+  }
+
+  await post.update({
+    title,
+    content,
+    updated: new Date(),
+  });
+
+   const updatedPostWithCategories = await BlogPost.findByPk(postId, {
+    attributes: ['title', 'content', 'userId'],
+    include: [{ model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+
+  return updatedPostWithCategories;
+};
+
+module.exports = {
+  updatePost,
+};
+
+
 module.exports = { 
   addNewBlogPost,
   getAllPosts,
   getPostById,
+  updatePost,
 
  };

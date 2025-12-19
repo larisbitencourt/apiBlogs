@@ -43,8 +43,31 @@ const getPostById = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  const { id } = req.params; 
+  const { title, content } = req.body;
+  const userId = req.user.payload.id; 
+
+  const updatedPost = await blogPostService.updatePost(id, userId, {
+    title,
+    content,
+  });
+
+  if (!updatedPost) {
+    return res.status(404).json({ message: 'Post not found' });
+  }
+
+  if (updatedPost.error) {
+    return res.status(updatedPost.error.status).json({ message: updatedPost.error.message });
+  }
+
+  return res.status(200).json(updatedPost);
+};
+
+
 module.exports = {
   addNewBlogPost,
   getAllPosts,
   getPostById,
+  updatePost,
 };

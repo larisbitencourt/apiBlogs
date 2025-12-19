@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { validateLogin, validateUser, auth, validatePost } = require('./middlewares');
+const { validateLogin, validateUser, auth, validatePost, validatePostUpdated } = require('./middlewares');
 const loginController = require('./controllers/loginController');
 const userController = require('./controllers/userController');
 const categoryController = require('./controllers/categoryController');
@@ -32,5 +32,7 @@ app.post('/user', validateUser, userController.addNewUser);
 app.post('/categories', auth, categoryController.addNewCategory);
 
 app.post('/post', auth, validatePost, blogPostController.addNewBlogPost);
+
+app.put('/post/:id', auth, validatePostUpdated, blogPostController.updatePost);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
