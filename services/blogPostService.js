@@ -119,10 +119,25 @@ const deletePost = async (id, userId) => {
   return deleted;
 };
 
+const searchPosts = async (q) => {
+  const posts = await BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  if (!q) return posts;
+
+  return posts.filter((post) =>
+    post.title.includes(q) || post.content.includes(q));
+};
+
 module.exports = { 
   addNewBlogPost,
   getAllPosts,
   getPostById,
   updatePost,
   deletePost,
+  searchPosts,
  };
