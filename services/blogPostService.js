@@ -71,7 +71,7 @@ const getPostById = async (id) => {
           as: 'categories', 
           through: { attributes: [] }, 
         },
-       ]
+       ],
   });
     return post;
 };

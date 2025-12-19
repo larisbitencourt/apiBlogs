@@ -33,5 +33,4 @@ app.post('/categories', auth, categoryController.addNewCategory);
 
 app.post('/post', auth, validatePost, blogPostController.addNewBlogPost);
 
-
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
